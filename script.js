@@ -233,7 +233,7 @@ let x = 0
 timerref = setInterval( function (){
 
 
-    if(x==10){
+    if(x==120){
         
         clearInterval(timerref);
         document.querySelector("#output").innerHTML="Your time's up!, "
