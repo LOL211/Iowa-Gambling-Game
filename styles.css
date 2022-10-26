@@ -1,0 +1,54 @@
+.btn-warning, .btn-outline-primary{
+    border-color: var(--bs-yellow);
+   color:var(--bs-yellow);
+   background-color: black;
+    margin:0.5rem;
+    margin-top: 1rem;
+   /*border-radius:25%;
+   width:3rem;
+   height:3rem;; */
+ } 
+ .btn-warning:hover, .btn-outline-primary:hover {
+     background-color: var(--bs-yellow);;
+     border-color: var(--bs-yellow);
+     color:black;
+ }
+ 
+ .btn-warning .disable, .btn-outline-primary .disable{
+    border-color: grey;
+    color:var(--bs-yellow);
+    background-color: grey;
+ }
+ .btn-warning .disable:hover, .btn-outline-primary .disable::hover {
+    border-color: grey;
+    color:var(--bs-yellow);
+    background-color: grey;
+}
+.invisible{
+    display: none;
+    visibility: hidden;
+}
+
+ .col{
+     width:fit-content
+ }
+ h3
+ {
+     width:fit-content;
+     margin: auto;
+     color: white;
+ }
+ body{
+     background-color: black;
+ }
+ h1{
+     color:var(--bs-yellow)
+ }
+ .main{
+     margin-top: 10rem;
+ 
+ }
+ p,h5{
+    color: white;
+    
+ }
