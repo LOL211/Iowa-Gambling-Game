@@ -14,14 +14,14 @@
      color:black;
  }
  
- .btn-warning .disable, .btn-outline-primary .disable{
+ .btn-warning.disable, .btn-outline-primary.disable{
     border-color: grey;
-    color:var(--bs-yellow);
+    color:black;
     background-color: grey;
  }
- .btn-warning .disable:hover, .btn-outline-primary .disable::hover {
+ .btn-warning.disable:hover, .btn-outline-primary.disable::hover {
     border-color: grey;
-    color:var(--bs-yellow);
+    color:black;
     background-color: grey;
 }
 .invisible{

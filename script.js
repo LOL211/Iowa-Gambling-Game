@@ -27,8 +27,18 @@ const reset = ()=>{
     money=1000;
     update_money();
     document.querySelector("#output").innerHTML="<br>";
-}
 
+    document.querySelectorAll(".btn-outline-primary").forEach(element => {
+        element.classList.remove("disable");
+        element.disabled = false;
+    });
+    document.querySelector("#tryagain").classList.add("disable")
+    document.querySelector("#tryagain").disabled = true
+    clicks = 0;
+    update_clicks();
+    startTimer()
+}
+let clicks = 0
 
 const probclick = (prob)=>{
     let output = document.querySelector("#output")
@@ -37,10 +47,12 @@ const probclick = (prob)=>{
 
     if(prob=='win-1'){
         if(Math.random()>=0.5? true: false){
-            if(Math.random()>=0.6? true: false)
+            if(Math.random()>=0.3? true: false)
                 output.innerHTML="You won 50 but lost 50"
-            else
+            else{
                 output.innerHTML="You lost 50"
+                money-=50;
+            }
         }
         else{
             output.innerHTML="You won 50!"
@@ -80,8 +92,20 @@ const probclick = (prob)=>{
             money-=100;
         }
     }
-
+    clicks+=1;
+    update_clicks();
     update_money();
+}
+const update_clicks = ()=>{
+    
+    document.querySelector("#clicks").innerHTML="Clicks: "+clicks;
+    if(clicks==50)
+    {
+        
+        document.querySelector("#output").innerHTML="You clicked too much! "
+        stop();
+    }
+    
 }
 
 const update_money = ()=>{
@@ -115,7 +139,7 @@ const start_onclick = ()=>{
    
    let r = document.createElement("div");
    r.classList.add("row");
-   r.classList.add("row-cols-2");
+   r.classList.add("row-cols-3");
    r.classList.add('justify-content-center');
    
    let rcol = document.createElement("div")
@@ -129,11 +153,16 @@ const start_onclick = ()=>{
    rtimer.classList.add("col");
    rtimer.classList.add("justify-content-center");
    rtimer.innerHTML="<center><h5 id=\"timer\">Timer: </h5><center>";
-
+   
+   let rclicks = document.createElement("div")
+   rclicks.classList.add("col");
+   rclicks.classList.add("justify-content-center");
+   rclicks.innerHTML="<center><h5 id=\"clicks\">Clicks: 0</h5><center>";
    
    
    r.appendChild(rcol);
    r.appendChild(rtimer)
+   r.appendChild(rclicks)
     let help = document.createElement('p');
     help.innerHTML="<center>Start clicking buttons and earning money!<center>"
     maincontainer.append(help);
@@ -165,18 +194,50 @@ const start_onclick = ()=>{
 
     
     maincontainer.append(row)
+
+    let rbut = document.createElement("div")
+    rbut.classList.add("row")
+    rbut.classList.add("row-cols-1");
+   rbut.classList.add('justify-content-center');
+
+   let rcoll = document.createElement('div')
+    rcoll.classList.add('col')
+   
+    
+    
+    
+    let ef =  document.createElement("button")
+    ef.setAttribute("type", "button")
+    ef.classList.add("btn-warning")
+    ef.classList.add("btn-lg")
+    ef.classList.add("disable")
+    ef.setAttribute('id',"tryagain")
+    ef.addEventListener("click",reset);
+     ef.innerHTML="Try again?"
+   // ef.disabled= true;
+    
+   
+    rcoll.appendChild(document.createElement('center').appendChild(ef))
+    rbut.appendChild(rcoll)
+    ef.disabled= true;
+    maincontainer.append(rbut)
+
     startTimer();
 }
+
+let timerref = ""
 const startTimer = ()=>{
 
 let timertext = document.querySelector("#timer");
 let x = 0
-let timerstart = setInterval( function (){
+timerref = setInterval( function (){
 
 
-    if(x==120){
+    if(x==10){
+        
+        clearInterval(timerref);
+        document.querySelector("#output").innerHTML="Your time's up!, "
         stop();
-        clearInterval(timerstart);
     }
    
 
@@ -194,8 +255,14 @@ let timerstart = setInterval( function (){
 
 
 const stop= ()=>{
+    clearInterval(timerref);
+    document.querySelector("#output").innerHTML+="You started with 1000 and ended up with "+money;
     document.querySelectorAll(".btn-outline-primary").forEach(element => {
-        element.classList.add("disabled");
+        element.classList.add("disable");
+        element.disabled = true; 
     });
+   let t =  document.querySelector("#tryagain")
+   t.classList.remove('disable')
+   t.disabled = false
 }
 startbtn.addEventListener("click",start_onclick);
